@@ -1,0 +1,14 @@
+.list6-wrapper {
+  width: 240px;
+  padding: 10px;
+  border: 1px solid black;
+  display: none;
+}
+
+.ant-card {
+  margin-top: 10px !important;
+}
+
+.displayed {
+  display: block;
+}

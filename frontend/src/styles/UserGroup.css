@@ -1,0 +1,30 @@
+.list3-wrapper {
+  padding: 10px 0 10px 20px;
+  position: relative;
+}
+
+.list3-label {
+  margin: 10px 0 10px 0;
+}
+
+.list3-info {
+  background-color: grey;
+  position: absolute;
+  top: 140px;
+  left: 60px;
+  display: none;
+}
+
+/* tag组件 */
+.site-tag-plus {
+  background: #fff;
+  border-style: dashed;
+}
+.edit-tag {
+  user-select: none;
+}
+.tag-input {
+  width: 78px;
+  margin-right: 8px;
+  vertical-align: top;
+}
