@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seu.seumedia.mapper.UserInforMapper">
+    <resultMap id="resultSet" type="com.seu.seumedia.entity.UserInfor">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="TINYINT"/>
+        <result column="birthday" property="birthday" jdbcType="TIMESTAMP"/>
+        <result column="id_number" property="idNumber" jdbcType="VARCHAR"/>
+        <result column="head_portrait" property="headPortrait" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="create_by" property="createBy" jdbcType="TIMESTAMP"/>
+        <result column="modified_by" property="modifiedBy" jdbcType="TIMESTAMP"/>
+        <result column="idDeleted" property="idDeleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="base">
+      id,user_id,gender,birthday,id_number,head_portrait,
+      description,create_by,modified_by,idDeleted
+    </sql>
+
+
+    <insert id="insertUserInfor">
+        insert into tbl_user_info(id,user_id,head_portrait) values(null,#{userId},#{hPUrl})
+    </insert>
+
+    <delete id="delete">
+        delete from tbl_user_info where id=#{id}
+    </delete>
+
+
+    <select id="selectById" resultMap="resultSet" resultType="com.seu.seumedia.entity.UserInfor">
+        select <include refid="base"/>
+            from tbl_user_info where user_id=#{Id}
+    </select>
+
+
+    <update id="updateHpById">
+        update tbl_user_info set head_portrait=#{head_portrait} where user_id=#{Id}
+    </update>
+
+</mapper>

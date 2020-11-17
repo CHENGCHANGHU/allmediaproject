@@ -1,0 +1,33 @@
+.header-nav {
+    background-color: #333!important;
+}
+
+.header-font{
+    color: #fdfdfd!important;
+}
+
+.header-btn{
+    color: #fff;
+    background-color: #899cf9;
+    border-color: #899cf9;
+}
+
+.header-btn:focus{
+    box-shadow: 0 0 0 0.2rem rgba(137,156,249,.5);
+}
+
+.header-lr{
+    font-size: 10pt;
+    color: #f8f8f8;
+}
+
+.to-lr{
+    padding: 0 5px;
+    font-size: 13pt;
+    font-weight: bold;
+    color: #768dfd;
+}
+
+.to-lr:hover{
+    color: #333;
+}

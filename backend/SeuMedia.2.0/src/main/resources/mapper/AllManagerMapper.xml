@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seu.seumedia.mapper.AllArticleManagerMapper" >
+    <resultMap id="Article_detail" type="com.seu.seumedia.entity.Article_detail">
+        <id column="id" property="id" />
+        <result column="article_id" property="article_id" jdbcType="BIGINT"/>
+        <result column="article_version" property="article_version" jdbcType="BIGINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="author_id" property="author_id" jdbcType="BIGINT"/>
+        <result column="abstracts" property="abstract" jdbcType="VARCHAR"/>
+        <result column="keywords" property="keywords" jdbcType="VARCHAR"/>
+        <result column="source" property="source" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+        <result column="category" property="category" jdbcType="VARCHAR"/>
+        <result column="subcategory" property="subcategory" jdbcType="VARCHAR"/>
+        <result column="topic" property="topic" jdbcType="VARCHAR"/>
+        <result column="copyright" property="copyright" jdbcType="VARCHAR"/>
+        <result column="originality" property="originality" jdbcType="VARCHAR" />
+        <result column="idDeleted" property="idDeleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <resultMap id="Article_picture" type="com.seu.seumedia.entity.Article_picture">
+        <id column="id" property="id" />
+        <result column="title" property="picture_title"/>
+        <result column="author_id" property="author_id" />
+        <result column="type" property="type"/>
+        <result column="height" property="height" />
+        <result column="weight" property="weight" />
+        <result column="size" property="size" />
+        <result column="article_id" property="article_id" />
+        <result column="article_version" property="article_version"/>
+        <result column="save_url" property="save_url"/>
+        <result column="idDeleted" property="idDeleted"/>
+    </resultMap>
+
+    <resultMap id="Article_vedio" type="com.seu.seumedia.entity.Article_vedio">
+        <id column="id" property="id"/>
+        <result column="title" property="Vedio_title"/>
+        <result column="author_id" property="author_id"/>
+        <result column="type" property="type"/>
+        <result column="height" property="height"/>
+        <result column="weight" property="weight" />
+        <result column="size" property="size"/>
+        <result column="article_id" property="article_id" />
+        <result column="article_version" property="article_version"/>
+        <result column="save_url" property="save_url" />
+        <result column="idDeleted" property="idDeleted"/>
+    </resultMap>
+
+    <sql id="Article_Detail_Column_List" >
+        id, article_id, article_version, title, author_id, abstracts, keywords, content, source, category,
+        subcategory, topic, copyright, originality, idDeleted
+    </sql>
+
+    <sql id="Article_Info_Column_List" >
+        id, title, version, user_id, level, status, create_by, modified_by, commited_by, published_by, idDeleted
+    </sql>
+
+    <sql id="Article_Picture_Column_List" >
+        id, title, author_id, article_version, article_id, type, height, weight, size, save_url, idDeleted,
+    </sql>
+
+    <sql id="Article_Vedio_Column_List">
+        id, title, author_id, article_id, article_version, duration, mine_type, height, weight, size, save_url, frame_url, vbit, frame_rate, idDeleted
+    </sql>
+
+    <!--向info，detail,picture,vedio表中插入信息-->
+    <insert id="Insert_ArticleInfo" parameterType="com.seu.seumedia.entity.Article_Info">
+        insert into tbl_article_info
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id, jdbcType=BIGINT}, #{title, jdbcType=VARCHAR}, #{version,jdbcType=BIGINT}, #{user_id, jdbcType=BIGINT},  #{level, jdbcType=TINYINT}, #{status, jdbcType=TINYINT}, #{create_by, jdbcType=TIMESTAMP}, #{modified_by, jdbcType=TIMESTAMP}, #{commited_by, jdbcType=TIMESTAMP}, #{published_by, jdbcType=TIMESTAMP}, #{idDeleted, jdbcType=TINYINT}
+        </trim>
+    </insert>
+
+    <insert id="Insert_ArticleVedio" parameterType="com.seu.seumedia.entity.Article_vedio">
+        insert into tbl_article_vedio
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id, jdbcType=BIGINT}, #{title, jdbcType=VARCHAR}, #{author_id,jdbcType=BIGINT}, #{article_id, jdbcType=BIGINT},  #{article_version, jdbcType=BIGINT}, #{duration, jdbcType=INTEGER}, #{mime_type, jdbcType=TINYINT}, #{height, jdbcType=INTEGER}, #{weight, jdbcType=INTEGER}, #{size, jdbcType=INTEGER}, #{save_url, jdbcType=VARCHAR}, #{frame_url, jdbc_Type=VARCHAR}, #{vbit, jdbcType=INTEGER}, #{frame_url, jdbc_Type=DECIMAL}, #{idDeleted, jdbc_Type=TINYINT}
+        </trim>
+    </insert>
+
+    <insert id="Insert_ArticleDetail" parameterType="com.seu.seumedia.entity.Article_detail">
+        insert into tbl_article_detail
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id, jdbcType=BIGINT}, #{article_id, jdbcType=BIGINT}, #{article_version,jdbcType=BIGINT}, #{title, jdbcType=VARCHAR},  #{author_id, jdbcType=BIGINT}, #{abstracts, jdbcType=VARCHAR}, #{keywords, jdbcType=VARCHAR}, #{content, jdbcType=TEXT}, #{source, jdbcType=VARCHAR}, #{category, jdbcType=VARCHAR}, #{subcategory, jdbcType=VARCHAR}, #{topic, jdbcType=VARCHAR}, #{originality, jdbcType=VARCHAR}, #{copyright, jdbcType=VARCHAR}, #{idDeleted, jdbc_Type=TINYINT}
+        </trim>
+    </insert>
+
+    <insert id="Insert_ArticlePicture" parameterType="com.seu.seumedia.entity.Article_picture">
+        insert into tbl_article_picture
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id, jdbcType=BIGINT}, #{title, jdbcType=VARCHAR}, #{author_id,jdbcType=BIGINT}, #{article_version, jdbcType=BIGINT},  #{article_id, jdbcType=BIGINT}, #{type, jdbcType=TINYINT}, #{height, jdbcType=INTEGER}, #{weight, jdbcType=INTEGER}, #{size, jdbcType=INTEGER}, #{save_url, jdbcType=VARCHAR}, #{idDeleted, jdbcType=TINYINT}
+        </trim>
+    </insert>
+
+    <!--返回当前info表中所有数据-->
+    <select id="selectInfoAll" resultType="com.seu.seumedia.entity.Article_Info">
+        select
+        <include refid="Article_Info_Column_List"/>
+        from tbl_article_info
+    </select>
+
+    <!--返回当前info表中所有审核状态为status的数据 0 待审核，1审核成功，2审核失败 -->
+    <select id="selectInfoAllByStatus" resultType="com.seu.seumedia.entity.Article_Info">
+        SELECT * FROM tbl_article_info where status = #{status}
+    </select>
+
+    <select id="selectInfoAllByStatusMTime" resultType="com.seu.seumedia.entity.Article_Info">
+        SELECT * FROM tbl_article_info WHERE user_id = #{user_id} and status = #{status}  and modified_by BETWEEN #{start_time} and #{end_time}
+    </select>
+    <select id="selectInfoAllByStatusCTime" resultType="com.seu.seumedia.entity.Article_Info">
+        SELECT * FROM tbl_article_info WHERE user_id = #{user_id} and status = #{status} and commited_by BETWEEN #{start_time} and #{end_time}
+    </select>
+    <select id="selectInfoAllByStatusPTime" resultType="com.seu.seumedia.entity.Article_Info">
+        SELECT * FROM tbl_article_info WHERE user_id = #{user_id} and status = #{status} and published_by BETWEEN #{start_time} and #{end_time}
+    </select>
+    <!--根据id查info表-->
+    <select id = "selectInfoAllById" resultType="com.seu.seumedia.entity.Article_Info">
+        SELECT * FROM tbl_article_info where id = #{id}
+    </select>
+
+    <select id = "selectInfoAllByisDeleted" resultType="com.seu.seumedia.entity.Article_Info">
+        SELECT * FROM tbl_article_info where idDeleted = #{isDeleted}
+    </select>
+
+
+    <!--根据id和version查表-->
+    <select id="SelectInfoByIdVersion" resultType="com.seu.seumedia.entity.Article_Info">
+        SELECT * FROM tbl_article_info where id = #{article_id} AND version= #{article_version}
+    </select>
+    <select id="SelectDetailByIdVersion" resultMap="Article_detail" parameterType="com.seu.seumedia.entity.Article_detail">
+        SELECT <include refid="Article_Detail_Column_List"/>
+        FROM tbl_article_detail where article_id = #{article_id} AND article_version= #{article_version}
+    </select>
+    <select id="SelectPictureByIdVersion" resultType="com.seu.seumedia.entity.Article_picture">
+        SELECT * FROM tbl_article_picture where article_id = #{article_id} AND article_version= #{article_version}
+    </select>
+    <select id="SelectVedioByIdVersion" resultType="com.seu.seumedia.entity.Article_vedio">
+        SELECT * FROM tbl_article_vedio where article_id = #{article_id} AND article_version= #{article_version}
+    </select>
+
+
+    <!--根据id查表-->
+    <select id="SelectInfoById" resultType="com.seu.seumedia.entity.Article_Info">
+        SELECT * FROM tbl_article_info where id = #{article_id}
+    </select>
+    <select id="SelectDetailById" resultMap="Article_detail" parameterType="com.seu.seumedia.entity.Article_detail">
+        SELECT <include refid="Article_Detail_Column_List"/>
+        FROM tbl_article_detail where article_id = #{article_id}
+    </select>
+    <select id="SelectPictureById" resultType="com.seu.seumedia.entity.Article_picture">
+        SELECT * FROM tbl_article_picture where article_id = #{article_id}
+    </select>
+    <select id="SelectVedioById" resultType="com.seu.seumedia.entity.Article_vedio">
+        SELECT * FROM tbl_article_vedio where article_id = #{article_id}
+    </select>
+
+    <!--根据id和version删除-->
+    <delete id="DeleteInfoByIdVersion" >
+        delete from tbl_article_info
+        where id = #{article_id} and version = #{article_version}
+    </delete>
+
+    <delete id="DeleteDetailByIdVersion" >
+        delete from tbl_article_detail
+        where article_id = #{article_id} and article_version = #{article_version}
+    </delete>
+
+    <delete id="DeletePictureByIdVersion" >
+        delete from tbl_article_picture
+        where article_id = #{article_id} and article_version = #{article_version}
+    </delete>
+
+    <delete id="DeleteVedioByIdVersion" >
+        delete from tbl_article_vedio
+        where article_id = #{article_id} and article_version = #{article_version}
+    </delete>
+
+    <update id="updateStatusById_version">
+        UPDATE tbl_article_info set status = #{status} WHERE id=#{article_id} and version=#{article_version}
+
+    </update>
+
+    <update id="updatePublished_ById_version">
+        UPDATE tbl_article_info set published_by = #{published_by} WHERE id=#{article_id} and version=#{article_version}
+
+    </update>
+
+</mapper>

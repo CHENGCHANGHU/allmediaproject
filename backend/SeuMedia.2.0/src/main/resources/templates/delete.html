@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Some City</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+</head>
+<body>
+<div id="header">
+    <div th:replace="~{header :: head-delete}"></div>
+</div>
+
+<div id="main">
+    <h1>Welcome to Article Service! </h1>
+    <div>
+        <form id="delete-form" th:action="@{delete}" method="post">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col" th:text="article_id"></th>
+                    <th scope="col" th:text="article_version"></th>
+                    <th scope="col">Submit</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="list">
+                        <input type="number" class="form-control" th:name="article_id">
+                    </td>
+                    <td class="list">
+                        <input type="string" class="form-control" th:name="article_version">
+                    </td>
+                    <td class="list">
+                        <input type="submit" class="btn btn-primary" th:value="delete">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <div>
+        <h3 th:text="${message}"></h3>
+    </div>
+</div>
+
+<div id="footer">
+    <div th:replace="~{footer :: footer-fragment}"></div>
+</div>
+</body>
+</html>
