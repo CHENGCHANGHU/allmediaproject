@@ -1,0 +1,59 @@
+/search/status
+description:
+  此接口内容展示和审核状态两个接口共同使用
+note:
+  status: 
+    草稿: 0
+    待审核: 1
+    审核通过: 2
+    审核失败: 3
+    已删除: 4
+    全部数据: 4
+    default: 5
+  user_id: 
+    正常用户使用: 1,2,3,4,5...
+    代表进入审核状态: -1 
+    default: -1
+  catgory: 
+    default: 全部
+  start_time: 
+    default: 1970-01-01 00:00:00 
+  end_time: 
+    default: 2030-01-01 00:00:00
+parameters:
+  user_id: -1
+  status: 5
+  category: 全部
+  start_time: 1970-01-01 00:00:00
+  end_time: 2030-01-01 00:00:00
+
+
+/search/return_finish_status
+description: 返回新闻展示需要的审核过的所有文章
+
+
+/search/return_by_id_version
+description: 根据获取的id和version返回对应的Content对象，包括正文图片视频
+parameters:
+  article_id: 1
+  article_version: 1
+
+
+/delete/deleted_by_Id_version
+description: 删除对应id和version的article(指修改状态)
+parameters:
+  article_id: 1
+  article_version: 1
+
+
+
+/article_pass
+description: 返回对于审核状态的修改是否成功
+note: 
+  status:
+    审核通过: 0
+    审核失败: 1
+parameters: 
+  article_id: 1
+  article_version: 1
+  status: 0
