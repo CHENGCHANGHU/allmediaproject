@@ -1,0 +1,20 @@
+ .logo{
+    color:#fff;
+    font-size: large;
+    width: 120px;
+    height: 31px;
+    /* background: rgba(255, 255, 255, 0.2); */
+    margin: 16px 28px 16px 10px;
+    text-align: center;
+    float: left;
+}
+.headImgSpan{
+    float: right;
+    margin-right:20px;
+}
+.headImgSpan span{
+    font-size:16px;
+    color:whitesmoke;
+    margin-left:10px;
+    
+}

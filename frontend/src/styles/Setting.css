@@ -1,0 +1,8 @@
+.list5-setting{
+  margin: 20px 0 20px 20px;
+}
+
+.avatar-uploader > .ant-upload {
+  width: 128px;
+  height: 128px;
+}
