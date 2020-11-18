@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+</head>
+<body>
+<nav class="navbar navbar-light bg-light header-nav" th:fragment="head-fragment">
+    <div class="container">
+        <span class="navbar-brand mb-0 h1 header-font">Property Management System</span>
+    </div>
+</nav>
+<ul class="nav nav-tabs" th:fragment="head-index">
+    <li role="presentation" class="active"><a href="/index">主页</a></li>
+    <li role="presentation"><a href="/add">增加文章</a></li>
+    <li role="presentation"><a href="/delete">删除文章</a></li>
+    <li role="presentation"><a href="/search">查询文章</a></li>
+    <li role="presentation"><a href="/modify">修改文章</a></li>
+</ul>
+
+<ul class="nav nav-tabs" th:fragment="head-add">
+    <li role="presentation"><a href="/index">主页</a></li>
+    <li role="presentation" class="active"><a href="/add">增加文章</a></li>
+    <li role="presentation"><a href="/delete">删除文章</a></li>
+    <li role="presentation"><a href="/search">查询文章</a></li>
+    <li role="presentation"><a href="/modify">修改信息</a></li>
+</ul>
+
+<ul class="nav nav-tabs" th:fragment="head-delete">
+    <li role="presentation"><a href="/index">主页</a></li>
+    <li role="presentation"><a href="/add">增加文章</a></li>
+    <li role="presentation" class="active"><a href="/delete">删除文章</a></li>
+    <li role="presentation"><a href="/search">查询文章</a></li>
+    <li role="presentation"><a href="/modify">修改文章</a></li>
+</ul>
+
+<ul class="nav nav-tabs" th:fragment="head-search">
+    <li role="presentation"><a href="/index">主页</a></li>
+    <li role="presentation"><a href="/add">增加文章</a></li>
+    <li role="presentation"><a href="/delete">删除文章</a></li>
+    <li role="presentation" class="active"><a href="/search">查询文章</a></li>
+    <li role="presentation"><a href="/modify">修改文章</a></li>
+</ul>
+
+<ul class="nav nav-tabs" th:fragment="head-modify">
+    <li role="presentation"><a href="/index">主页</a></li>
+    <li role="presentation"><a href="/add">增加文章</a></li>
+    <li role="presentation"><a href="/delete">删除文章</a></li>
+    <li role="presentation"><a href="/search">查询文章</a></li>
+    <li role="presentation" class="active"><a href="/modify">修改文章</a></li>
+</ul>
+
+</body>
+</html>

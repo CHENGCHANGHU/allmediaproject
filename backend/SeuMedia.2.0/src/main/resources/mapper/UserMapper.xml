@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seu.seumedia.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.seu.seumedia.entity.User">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="create_by" property="createBy" jdbcType="TIMESTAMP"/>
+        <result column="modified_by" property="modifiedBy" jdbcType="TIMESTAMP"/>
+        <result column="idDeleted" property="idDeleted" jdbcType="TINYINT"/>
+        <result column="userStatus" property="userStatus" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, username, password, email,
+    phone, create_by, modified_by, idDeleted,userStatus
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" resultType="com.seu.seumedia.entity.User">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_user where id = #{id}
+    </select>  <!--加上 resultMap="BaseResultMap" -->
+
+    <select id="selectByPhone" resultMap="BaseResultMap" resultType="com.seu.seumedia.entity.User">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_user where phone = #{phone}
+    </select>
+
+    <select id="selectByEmail" resultMap="BaseResultMap" resultType="com.seu.seumedia.entity.User">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_user where email = #{email}
+    </select>
+
+    <insert id="insert" parameterType="com.seu.seumedia.entity.User">
+    insert into tbl_user (id, username, password,
+      email,phone,create_by, modified_by, idDeleted,userStatus)
+    values (null ,  #{username},#{password}, #{email},
+    #{phone}, #{createBy}, #{modifiedBy},#{idDeleted},#{userStatus})
+  </insert>
+    <update id="updateByPhone">
+        update tbl_user set password=#{password} where phone=#{phone}
+    </update>
+
+    <update id="updateByEmail">
+        update tbl_user set password=#{password} where email=#{email}
+    </update>
+    <update id="updateById">
+        update tbl_user set username=#{username},password=#{password},phone=#{phone},email=#{email} where id=#{Id}
+    </update>
+</mapper>

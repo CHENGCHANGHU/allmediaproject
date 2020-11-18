@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Article Info</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <style>
+        #search_form {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    <div th:replace="~{header :: head-search}"></div>
+</div>
+
+<div id="main">
+    <div>
+        <form class="row" id="search_form" th:action="@{search}" method="post">
+            <div class="col-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon1" id="basic-addon1">0</span>
+                    <input type="number" class="form-control1" th:name="id" aria-describedby="basic-addon1"
+                           th:placeholder="article_id">
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <input type="submit" class="btn btn-primary" th:value="search">
+            </div>
+        </form>
+    </div>
+
+
+    <table class="table table-bordered table-striped">
+        <caption th:text="'Article Record: ' + ${articleList.size()} + ''"></caption>
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col" th:text="'#'+${articleList.size()}"></th>
+            <th scope="col" th:each="field: ${fields}" th:text="${field.getName()}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="article, status: ${articleList}">
+            <th scope="row" th:text="|${status.count}|"></th>
+            <td class="list" th:each="field: ${fields}" th:text="${article[field.getName()]}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="footer">
+    <div th:replace="~{footer :: footer-fragment}"></div>
+</div>
+</body>
+</html>

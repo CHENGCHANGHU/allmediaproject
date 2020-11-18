@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seu.seumedia.mapper.CommentMapper">
+
+    <cache  />
+
+    <insert id="addComment" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into tbl_comment(content, author_id, ip, type) values (#{content}, #{author_id}, #{ip}, #{type})
+    </insert>
+
+    <insert id="addArticleComment" parameterType="com.seu.seumedia.entity.Comment">
+        insert into tbl_article_comment (article_id, comment_id, type) values (#{article_id}, #{id}, #{type})
+    </insert>
+
+    <!--    <select id="selectCommentByArticleId" parameterType="java.math.BigInteger" resultType="comment">-->
+    <!--        select id, content, author_id, ip, create_by, modified_by, type from tbl_comment where id in (select comment_id from tbl_article_comment where article_id = #{article_id}) and is_effective = 1 order by create_by-->
+    <!--    </select>-->
+    <select id="selectCommentByArticleId" parameterType="java.math.BigInteger" resultType="com.seu.seumedia.entity.Comment">
+        select
+        tc.id,
+        tac.article_id,
+        tc.content,
+        tc.author_id,
+        tc.ip,
+        tc.create_by,
+        tc.modified_by,
+        tc.type
+        from
+        tbl_comment tc
+        inner join tbl_article_comment tac on tc.id = tac.comment_id
+        where
+        tac.article_id = #{article_id}
+        and tc.is_effective = 1
+        order by
+        tac.create_by
+    </select>
+
+    <select id="selectCommentByUserId" parameterType="java.math.BigInteger" resultType="com.seu.seumedia.entity.Comment">
+        select id, content, author_id, ip, create_by, modified_by, type from tbl_comment where author_id = #{author_id}
+    </select>
+
+</mapper>
