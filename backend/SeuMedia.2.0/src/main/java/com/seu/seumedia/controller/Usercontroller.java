@@ -1,15 +1,10 @@
 package com.seu.seumedia.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.seu.seumedia.entity.MediaUserInfo;
 import com.seu.seumedia.entity.User;
-import com.seu.seumedia.service.LoginService;
-import com.seu.seumedia.service.RegistService;
-import com.seu.seumedia.service.UpdateService;
-import com.seu.seumedia.service.UserInfoService;
-import com.seu.seumedia.utils.HashCode;
-import com.seu.seumedia.utils.HttpInfor;
-import com.seu.seumedia.utils.SavePicture;
-import com.seu.seumedia.utils.getCurrentDate;
+import com.seu.seumedia.service.*;
+import com.seu.seumedia.utils.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -27,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -49,6 +45,9 @@ public class Usercontroller {
     private LoginService loginService;
     @Autowired
     private UpdateService updateService;
+
+    @Autowired
+    private ManageMediaUserService manageMediaUserService;
    /* @RequestMapping("getUser/{id}")
     public String GetUser(@PathVariable int id){
         return userService.selectByPrimaryKey(id).toString();
@@ -261,6 +260,30 @@ public class Usercontroller {
         return loginService.selectById(id);
     }
 
+    @ApiOperation("返回自媒体用户的信息（给前端使用）返回值：id,username,phone,email,userStatus")
+    @ResponseBody
+    @RequestMapping(value = "selectMediaUser", method = RequestMethod.POST)
+    public String selectMediaUser() {
+        List<MediaUserInfo> mediaUserList = manageMediaUserService.getMediaUser();
+        return JSONUtil.Entity2JSON(mediaUserList);
+    }
+
+    @ApiOperation("返回自媒体用户的删除结果（给前端使用）返回值：成功{message:1},失败:{message:0}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "待删除的自媒体用户id", required = true, dataType = "String")
+    })
+    @ResponseBody
+    @RequestMapping(value = "deleteMediaUserInfo", method = RequestMethod.POST)
+    public String deleteMediaUserInfo(@Param(value = "id") String id) {
+        long Id = Long.parseLong(id);
+        JSONObject obj = new JSONObject();
+        if (manageMediaUserService.deleteMediaUserInfo(Id)) {
+            obj.put("message", "删除成功");
+        } else {
+            obj.put("message", "删除失败");
+        }
+        return obj.toJSONString();
+    }
 
 
 
