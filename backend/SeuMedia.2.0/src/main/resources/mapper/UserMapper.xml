@@ -13,10 +13,23 @@
         <result column="userStatus" property="userStatus" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <sql id="Base_Column_List">
-    id, username, password, email,
-    phone, create_by, modified_by, idDeleted,userStatus
+    <resultMap id="MediaUserInfo" type="com.seu.seumedia.entity.MediaUserInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="userStatus" property="userStatus" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="MediaUserInfoList">
+        id, username, password, email,phone,userStatus
     </sql>
+
+    <sql id="Base_Column_List">
+        id, username, password, email,
+        phone, create_by, modified_by, idDeleted,userStatus
+    </sql>
+
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" resultType="com.seu.seumedia.entity.User">
         select
@@ -37,11 +50,11 @@
     </select>
 
     <insert id="insert" parameterType="com.seu.seumedia.entity.User">
-    insert into tbl_user (id, username, password,
-      email,phone,create_by, modified_by, idDeleted,userStatus)
-    values (null ,  #{username},#{password}, #{email},
-    #{phone}, #{createBy}, #{modifiedBy},#{idDeleted},#{userStatus})
-  </insert>
+        insert into tbl_user (id, username, password,
+        email,phone,create_by, modified_by, idDeleted,userStatus)
+        values (null ,  #{username},#{password}, #{email},
+        #{phone}, #{createBy}, #{modifiedBy},#{idDeleted},#{userStatus})
+    </insert>
     <update id="updateByPhone">
         update tbl_user set password=#{password} where phone=#{phone}
     </update>
@@ -51,5 +64,16 @@
     </update>
     <update id="updateById">
         update tbl_user set username=#{username},password=#{password},phone=#{phone},email=#{email} where id=#{Id}
+    </update>
+
+
+    <select id="selectMediaUser" resultMap="MediaUserInfo">
+        select
+        <include refid="MediaUserInfoList"/>
+        from tbl_user where userStatus="1" and idDeleted="0"
+    </select>
+
+    <update id="deleteMediaUserInfo">
+        update tbl_user set idDeleted="1" where id=#{Id} and idDeleted="0" and userStatus="1"
     </update>
 </mapper>
